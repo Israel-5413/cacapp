@@ -1,0 +1,125 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Resource {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  file        String?
+  creatorId   String?
+  dateCreated String?
+  status      Boolean?
+}
+
+model Meeting {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StudyGroup {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  uniqueId          String?
+  name              String?
+  description       String?
+  status            Boolean?
+  category          String?
+  groupProfileImage String?
+  creatorId         String?
+  dateCreated       String?
+}
+
+model CommentSection {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String?
+  category    String?
+  message     String?
+  creatorId   String?
+  dateCreated String?
+  status      Boolean?
+  uniqueId    String?
+}
+
+model PrivateChat {
+  id                String    @id @default(cuid())
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  dateCreated       DateTime?
+  incomingMessageId String?
+  outgoingMessageId String?
+  message           String?
+}
+
+model Calendar {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  title       String?
+  start       DateTime?
+  end         DateTime?
+  description String?
+  color       String?
+  icon        String?
+}
+
+model User {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  firstName    String?
+  lastName     String?
+  username     String   @unique
+  email        String?  @unique
+  password     String
+  roles        Json
+  contact      String?
+  status       Boolean?
+  uniqueId     String?
+  profileImage String?
+  dateJoined   String?
+}
+
+model FeedbackReply {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  feedbackId  String?
+  replyerId   String?
+  comment     String?
+  dateCreated String?
+}
+
+model MyFriends {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  myUniqueId      String?
+  friendsUniqueId String?
+  status          Boolean?
+  dateCreated     String?
+}
+
+model Tasks {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  taskBody     String?
+  creatorId    String?
+  dateToStart  String?
+  dateToFinish String?
+  dateCreated  String?
+  uniqueId     String?
+  title        String?
+  category     String?
+  status       Boolean?
+}
